@@ -1,0 +1,40 @@
+import itertools
+import math
+
+def get_input(n, len_in):
+  lst = [0,1,0,-1]
+  new_lst = []
+  for i in lst:
+      for j in itertools.repeat(i,n):
+          new_lst.append(j)
+  end_lst = []
+  for elt in itertools.cycle(new_lst):
+      if len(end_lst) > len_in:
+          break
+      end_lst.append(elt)
+  #print("new_list", end_lst)
+  return end_lst[1:len_in + 1]
+
+s = "59782619540402316074783022180346847593683757122943307667976220344797950034514416918778776585040527955353805734321825495534399127207245390950629733658814914072657145711801385002282630494752854444244301169223921275844497892361271504096167480707096198155369207586705067956112600088460634830206233130995298022405587358756907593027694240400890003211841796487770173357003673931768403098808243977129249867076581200289745279553289300165042557391962340424462139799923966162395369050372874851854914571896058891964384077773019120993386024960845623120768409036628948085303152029722788889436708810209513982988162590896085150414396795104755977641352501522955134675"
+sez = [int(i) for i in s]
+n = len(sez)
+
+phases = 100
+
+for p in range(phases):
+    print(p)
+    n = len(sez)
+    temp_sez = []
+    #print(sez)
+    for i in range(n):
+        #print(i)
+        this_pattern = get_input(i+1,n)
+        #print(this_pattern)
+        elt = sum([sez[j]*this_pattern[j] for j in range(n)])
+        #print(elt)
+        temp_sez.append(abs(elt)%10)
+    #print(temp_sez)
+    sez = temp_sez.copy()
+
+print(temp_sez[:9])
+        
